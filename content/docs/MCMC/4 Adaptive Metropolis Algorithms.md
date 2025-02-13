@@ -131,7 +131,10 @@ $(2)$ WHILE {{< katex >}}t\leq T{{< /katex >}}:
 
 (d) Otherwise(i.e., if {{< katex >}}u \leq \pi(\theta')/q_m(\theta'){{< /katex >}}), draw {{< katex >}}u'\sim U([0,1)){{< /katex >}} and compute the acceptance probability:
 
-$$\alpha_t\equiv \alpha(\theta',\theta^{(t-1)})=min[1,\frac{\pi(\theta')min[\pi(\theta^{(t-1)}),q_m(\theta^{(t-1)})]}{\pi(\theta^{(t-1)})min[\pi(\theta'),q_m(\theta')]}]$$
+{{< katex display=true >}}
+\alpha_t\equiv \alpha(\theta',\theta^{(t-1)})=min[1,\frac{\pi(\theta')min[\pi(\theta^{(t-1)}),q_m(\theta^{(t-1)})]}{\pi(\theta^{(t-1)})min[\pi(\theta'),q_m(\theta')]}] 
+{{< /katex >}}
+
 
 (e)If {{< katex >}}m\leq T_l{{< /katex >}}, draw {{< katex >}}u''\sim U([0,1]){{< /katex >}}, if {{< katex >}}u''>q_m(\theta')/\pi(\theta'){{< /katex >}}, set {{< katex >}}S^{(m+1)}=S^{(m)}\cup \mathcal{\theta'}{{< /katex >}} and {{< katex >}}K_{m+1}=K_m+1{{< /katex >}} and sort {{< katex >}}S_{t+1}{{< /katex >}} in ascending order. Otherwise, set {{< katex >}}S^{(m+1)}=S^{(m)}{{< /katex >}} and {{< katex >}}K_{m+1}=K_m{{< /katex >}}.
 
@@ -156,7 +159,10 @@ $(2)$ WHILE {{< katex >}}t\leq T{{< /katex >}}:
 
 (d) Otherwise(i.e., if {{< katex >}}u \leq \pi(\theta')/q_m(\theta'){{< /katex >}}), draw {{< katex >}}u'\sim U([0,1)) {{< /katex >}} and compute the acceptance probability:
 
-$$\alpha_t\equiv \alpha(\theta',\theta^{(t-1)})=min[1,\frac{\pi(\theta')min[\pi(\theta^{(t-1)}),q_m(\theta^{(t-1)})]}{\pi(\theta^{(t-1)})min[\pi(\theta'),q_m(\theta')]}]$$
+{{< katex display=true >}}
+\alpha_t\equiv \alpha(\theta',\theta^{(t-1)})=min[1,\frac{\pi(\theta')min[\pi(\theta^{(t-1)}),q_m(\theta^{(t-1)})]}{\pi(\theta^{(t-1)})min[\pi(\theta'),q_m(\theta')]}]
+{{< /katex >}}
+
 
 (e) If {{< katex >}}u'\leq \alpha_t{{< /katex >}}, accept {{< katex >}}\theta'{{< /katex >}} and set {{< katex >}}\theta^{(t)}=\theta'{{< /katex >}}. Otherwise (i.e., if {{< katex >}}u'<\alpha_t{{< /katex >}}), reject {{< katex >}}\theta'{{< /katex >}} and set {{< katex >}}\theta^{(t)}=\theta^{(t-1)}{{< /katex >}} and {{< katex >}}\vartheta=\theta'{{< /katex >}}.
 
