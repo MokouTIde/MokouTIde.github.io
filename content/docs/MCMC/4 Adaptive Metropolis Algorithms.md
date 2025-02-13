@@ -164,7 +164,7 @@ $(2)$ WHILE {{< katex >}}t\leq T{{< /katex >}}:
 
 (e) If {{< katex >}}u'\leq \alpha_t{{< /katex >}}, accept {{< katex >}}\theta'{{< /katex >}} and set {{< katex >}}\theta^{(t)}=\theta'{{< /katex >}}. Otherwise (i.e., if {{< katex >}}u'<\alpha_t{{< /katex >}}), reject {{< katex >}}\theta'{{< /katex >}} and set {{< katex >}}\theta^{(t)}=\theta^{(t-1)}{{< /katex >}} and {{< katex >}}\vartheta=\theta'{{< /katex >}}.
 
-(f) Draw {{< katex >}}u''\sim U([0,1)){{< /katex >}}. If {{< katex >}}u''>q_m(\vartheta)/\pi(\vartheta){{< /katex >}}, set {{< katex >}}S^{(m+1)}=S^{(m)}\cup \left\{\vartheta\right\}{{< /katex >}} and {{< katex >}}K_{m+1}=K_m+1{{< /katex >}}. Otherwise, (i.e., if {{< katex >}}u''\leq q_m(\vartheta)/\pi(\vartheta){{< /katex >}}), set {{< katex >}}S^{(m+1)}=S^{(m)} {{< .katex >}} and {{< katex >}}K_{m+1}=K_m+1{{< /katex >}}.
+(f) Draw {{< katex >}}u''\sim U([0,1)){{< /katex >}}. If {{< katex >}}u''>q_m(\vartheta)/\pi(\vartheta){{< /katex >}}, set {{< katex >}}S^{(m+1)}=S^{(m)}\cup \left\{\vartheta\right\}{{< /katex >}} and {{< katex >}}K_{m+1}=K_m+1{{< /katex >}}. Otherwise, (i.e., if {{< katex >}}u''\leq q_m(\vartheta)/\pi(\vartheta){{< /katex >}}), set {{< katex >}}S^{(m+1)}=S^{(m)} {{< /katex >}} and {{< katex >}}K_{m+1}=K_m+1{{< /katex >}}.
 
 (g) Set {{< katex >}}m=m+1,t=t+1{{< /katex >}} and return to step 2(a).
 
