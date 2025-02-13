@@ -1,4 +1,4 @@
-## Algorithm General Adaptive Metropolis Algorithm (AM).
+## General Adaptive Metropolis Algorithm (AM).
 
 $(1)$ Initialization: Choose an initial covariance {{< katex >}}\Sigma_0{{< /katex >}}, an initial adaptation parameter {{< katex >}}\lambda_0{{< /katex >}}, a target acceptance rate {{< katex >}}\bar{\alpha}{{< /katex >}} , an initial state {{< katex >}}\theta^{(0)} {{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}} and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
@@ -29,7 +29,7 @@ $(3)$ Approximate the integral using
 {{< /katex >}}
 
 
-## ARS
+## Adaptive Rejection Sampling (ARS).
 
 Assume that we want to draw samples from a target {{< katex >}}pdf{{< /katex >}}, with support {{< katex >}}D_{\theta}\subseteq \mathbb{R}{{< /katex >}}, known up a normalization constant. The ARS procedure can be applied when {{< katex >}}\pi(\theta){{< /katex >}} is log-concave, i.e. when
 {{< katex display=true >}}
@@ -73,9 +73,7 @@ and denoting as {{< katex >}}L_{i,i+1}(\theta){{< /katex >}} the straight line p
 {{< /katex >}}
 
 
-## ARMS
-
-**Algorithm Adaptive rejection Metropolis sampling (ARMS).**
+## Adaptive rejection Metropolis sampling (ARMS).
 
 $(2)$ WHILE {{< katex >}}t\leq T{{< /katex >}}:
 
@@ -111,11 +109,9 @@ $(3)$ Approximate the integral
 {{< /katex >}}
 
 
-## A{{< katex >}}^2{{< /katex >}}RMS
+## Doubly adaptive rejection Metropolis sampling (AARMS)
 
 Two alternative strategies are raised to improve the standard ARMS algorithm. We denote these two variants as A{{< katex >}}^2{{< /katex >}}RMS and IA{{< katex >}}^2{{< /katex >}}RMS where the A{{< katex >}}^2{{< /katex >}} emphasizes that we incorporate an additional adaptive step to improve the proposal density w.r.t. the standard ARMS.
-
-**Algorithm Doubly adaptive rejection Metropolis sampling (A{{< katex >}}^2{{< /katex >}}RMS).**
 
 $(1)$ Initialization: Set {{< katex >}}t=0{{< /katex >}} (chain’s iteration) and {{< katex >}}m=0{{< /katex >}} (algorithm’s iteration). Choose an initial state {{< katex >}}(\theta^{(0)}){{< /katex >}}, an initial number of support points {{< katex >}}(K_0){{< /katex >}}, an initial support set {{< katex >}}S(0)=\left\{\theta_1^{(0)},\cdots,\theta_{K_0}^{(0)}\right\}{{< /katex >}}, the number of additional adaptive step $T_l$, the total number of iterations {{< katex >}}(T){{< /katex >}} and the burn-in period {{< katex >}}(T_b){{< /katex >}}.
 
@@ -141,9 +137,7 @@ $(3)$ Approximate the integral:
 \hat{I}_{(T-T_b)}=\frac{1}{T-T_b} \sum_{t=T_b+1}^{T} g(\theta^{(t)})
 {{< /katex >}}
 
-## IA{{< katex >}}^2{{< /katex >}}RMS
-
-**Algorithm Independent doubly adaptive rejection Metropolis sampling (IA{{< katex >}}^2{{< /katex >}}RMS).**
+## Independent doubly adaptive rejection Metropolis sampling (IAARMS).
 
 $(1)$ Initialization: Set {{< katex >}}t=0{{< /katex >}} (chain’s iteration) and {{< katex >}}m=0{{< /katex >}} (algorithm’s iteration). Choose an initial state {{< katex >}}(\theta^{(0)}){{< /katex >}}, an initial number of support points {{< katex >}}(K_0){{< /katex >}}, an initial support set {{< katex >}}S(0)=\left\{\theta_1^{(0)},\cdots,\theta_{K_0}^{(0)}\right\}{{< /katex >}}, the total number of iterations {{< katex >}}(T){{< /katex >}} and the burn-in period {{< katex >}}(T_b){{< /katex >}}.
 
