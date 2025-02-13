@@ -20,22 +20,25 @@ $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 \Sigma_t=Cov[\theta^{(0)},\cdots,\theta^{(t-1)},\theta^{(t)}]+\epsilon I.
 {{< /katex >}}
 
-(e) Compute a new {{< katex >}}\lambda_t{{< /katex >}}, e.g., by apllying the rule of {{< katex >}}log\lambda_t=log\lambda_{t-1}+\gamma_t(\alpha_t-\bar{\alpha}){{< /katex >}}._
+(e) Compute a new {{< katex >}}\lambda_t{{< /katex >}}, e.g., by apllying the rule of {{< katex >}}log\lambda_t=log\lambda_{t-1}+\gamma_t(\alpha_t-\bar{\alpha}){{< /katex >}}.
 
 $(3)$ Approximate the integral using
 
 {{< katex display=true >}}
-\hat{I}_{(T-T_b)}=\frac{1}{T-T_b}\sum_{t=T_b+1}^{T}g(\theta^{(t)})
+\hat{I}_{(T-T_b)}=\frac{1}{T-T_b}\sum_{t=T_b+1}^{T}g(\theta^{(t)}).
 {{< /katex >}}
 
 
 ## Adaptive Rejection Sampling (ARS).
 
 Assume that we want to draw samples from a target {{< katex >}}pdf{{< /katex >}}, with support {{< katex >}}D_{\theta}\subseteq \mathbb{R}{{< /katex >}}, known up a normalization constant. The ARS procedure can be applied when {{< katex >}}\pi(\theta){{< /katex >}} is log-concave, i.e. when
+
 {{< katex display=true >}}
-V(\theta)\triangleq log(\pi(\theta))
+V(\theta)\triangleq log(\pi(\theta)),
 {{< /katex >}}
+
 is strictly concave {{< katex >}}\forall \theta\in D_{\theta}\subseteq \mathbb{R}{{< /katex >}}. In this case, let
+
 {{< katex display=true >}}
 S^{(0)}\triangleq \left\{\theta_1^{(0)},\theta_2^{(0)},\cdots,\theta_{K_0}^{(0)}\right\} \subset D_{\theta}
 {{< /katex >}}
