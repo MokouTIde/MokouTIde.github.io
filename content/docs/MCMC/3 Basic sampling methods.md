@@ -11,8 +11,10 @@ $(3)$ With probability {{< katex >}}\alpha{{< /katex >}}, accept the draw {{< ka
 
 To decide whether to accept or not, draw one observation, {{< katex >}}u{{< /katex >}}, from the uniform distribution on {{< katex >}}U(0,1){{< /katex >}}. If {{< katex >}}u\leqslant \alpha{{< /katex >}}, accept {{< katex >}}\theta^*{{< /katex >}}; If {{< katex >}}u\geqslant a{{< /katex >}}, reject {{< katex >}}\theta^*`{{< /katex >}}.
 
-NOTE：Metropolis算法最早用于求粒子系统的内能，因此{{< katex >}}(2){{< /katex >}}中出现了{{< katex >}}exp(-\Delta E/kT){{< /katex >}}项
-
+{{% hint info %}}
+**NOTE**  
+Metropolis算法最早用于求粒子系统的内能，因此{{< katex >}}(2){{< /katex >}}中出现了{{< katex >}}exp(-\Delta E/kT){{< /katex >}}项。
+{{% /hint %}}
 
 ## 3.2 Metroplis-Hasitings Algorithm
 
@@ -48,4 +50,7 @@ Cycle through the rest of the components, {{< katex >}}\theta_3,\cdots,\theta_q{
 
 $(3)$ Repeat step {{< katex >}}(2){{< /katex >}} until convergence is achieved.
 
-NOTE：Gibbs采样中，可分为三类，分别是一般Gibbs采样（Generic Gibbs sampler），系统扫描Gibbs采样（Systematic scan Gibbs sampler），对称扫描Gibbs采样（Symmetric scan Gibbs sampler），精度有提升的同时计算量也增加，因此整体效率提升不大。
+{{% hint info %}}
+**NOTE**  
+Gibbs采样中，可分为三类，分别是一般Gibbs采样（Generic Gibbs sampler），系统扫描Gibbs采样（Systematic scan Gibbs sampler），对称扫描Gibbs采样（Symmetric scan Gibbs sampler），精度有提升的同时计算量也增加，因此整体效率提升不大。
+{{% /hint %}}
