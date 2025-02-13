@@ -27,9 +27,9 @@ here, {{< katex >}}D=\frac{k_BT}{\lambda}{{< /katex >}}, which means the square 
 
 **Simulated annealing (SA)** is a probabilistic technique for approximating the global optimum of a given function. Specifically, it is a metaheuristic to approximate global optimization in a large search space for an optimization problem. 
 
-The state of some physical systems, and the function {{< katex >}}E(s) {{< /katex >}} to be minimized, is analogous to the internal energy of the system in that state. The goal is to bring the system, from an arbitrary initial state, to a state with the minimum possible energy.
+The state of some physical systems, and the function {{< katex >}}E(s) {{< /katex >}} to be minimized, is analogous to the internal energy of the system in that state. The goal is to bring the system, from an arbitrary initial state to a state with the minimum possible energy.
 
-$(1)$ Choose an initial state {{< katex >}}\theta^{(0)} {{< /katex >}}, the discretization step $\Delta\tau$, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
+$(1)$ Choose an initial state {{< katex >}}\theta^{(0)} {{< /katex >}}, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
 $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 
@@ -78,7 +78,6 @@ The Hamiltonian
 H(\theta,\rho)=-log\pi(\theta)+\frac{1}{2}\rho^T\rho
 
 {{< /katex >}}
-
  
 {{< katex display=true >}}
 
@@ -107,11 +106,11 @@ The HMC algorithm constructs the proposal distribution by simulating trajectorie
 采用辛积分器计算结果，例如蛙跳法
 {{% /hint %}}
  
-$(1)$ Choose an initial state $\theta^{(0)}$, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the number of integration steps {{< katex >}}L{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
+$(1)$ Choose an initial state {{< katex >}}\theta^{(0)}{{< /katex >}}, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the number of integration steps {{< katex >}}L{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
 $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 
-(a) Draw {{< katex >}}u\sim U([0,1)) {{< /katex >}}, numerically solve the Hamiltonian equations, using $L$ steps of a Leapfrog method starting from {{< katex >}}\tilde{\theta}^{(0)}=\theta^{(t-1)} {{< /katex >}} and {{< katex >}}\tilde{\rho}^{(0)}\sim N(0,I) {{< /katex >}}, setting {{< katex >}}\theta'=\tilde{\theta}^{(L\Delta\tau)} {{< /katex >}} and {{< katex >}}\rho'=-\tilde{\rho}^{(L\Delta\tau)} {{< /katex >}}.
+(a) Draw {{< katex >}}u\sim U([0,1)) {{< /katex >}}, numerically solve the Hamiltonian equations, using {{< katex >}}L{{< /katex >}} steps of a Leapfrog method starting from {{< katex >}}\tilde{\theta}^{(0)}=\theta^{(t-1)} {{< /katex >}} and {{< katex >}}\tilde{\rho}^{(0)}\sim N(0,I) {{< /katex >}}, setting {{< katex >}}\theta'=\tilde{\theta}^{(L\Delta\tau)} {{< /katex >}} and {{< katex >}}\rho'=-\tilde{\rho}^{(L\Delta\tau)} {{< /katex >}}.
 
 (b) Compute the acceptance probability:
 
@@ -139,7 +138,10 @@ $(3)$ Approximate the integral using
 
 ![HMC1](E:\学习\研二\Pres\Summer work\7.30\MCMC3\Figure\HMC1.png)
 
-NOTE：可将分布翻转，分布的峰看做碗底，HMC就是在一个无摩擦的碗里拨动一个小球，小球的每次停止位置即为一个采样，[可看直观图像](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
+{{% hint info %}}
+**NOTE**  
+可将分布翻转，分布的峰看做碗底，HMC就是在一个无摩擦的碗里拨动一个小球，小球的每次停止位置即为一个采样，[可看直观图像](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
+{{% /hint %}}
  
 ## Riemann manifold MALA and HMC
 
@@ -181,7 +183,6 @@ where
 
 {{< /katex >}}
 
- 
 
 {{< katex display=true >}}
 
