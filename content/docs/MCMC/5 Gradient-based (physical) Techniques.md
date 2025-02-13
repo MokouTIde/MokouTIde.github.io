@@ -28,9 +28,9 @@ The state of some physical systems, and the function {{< katex >}}E(s) {{< /kate
 
 $(1)$ Choose an initial state {{< katex >}}\theta^{(0)} {{< /katex >}}, the discretization step $\Delta\tau$, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
-$(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:\\
+$(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 
-(a) Draw $z\sim N(0,I), u\sim U([0,1))$ and simulate a new sample from the Langevin diffusion:
+(a) Draw {{< katex >}}z\sim N(0,I), u\sim U([0,1)){{< /katex >}} and simulate a new sample from the Langevin diffusion:
 
 {{< katex display=true >}}
 
