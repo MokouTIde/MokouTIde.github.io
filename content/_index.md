@@ -3,39 +3,24 @@ title: Introduction
 type: docs
 ---
 
-# Acerbo datus maxime
-
+# Sampling for Complex Networks
 {{% columns %}}
-## Astris ipse furtiva
+## Advanced MCMC algorithms for network data
 
-Est in vagis et Pittheus tu arge accipiter regia iram vocatur nurus. Omnes ut
-olivae sensit **arma sorori** deducit, inesset **crudus**, ego vetuere aliis,
-modo arsit? Utinam rapta fiducia valuere litora _adicit cursu_, ad facies
+Various improvements of MCMC algorithms.
 
 <--->
 
-## Suis quot vota
+## Inference problems on network
 
-Ea _furtique_ risere fratres edidit terrae magis. Colla tam mihi tenebat:
-miseram excita suadent es pecudes iam. Concilio _quam_ velatus posset ait quod
-nunc! Fragosis suae dextra geruntur functus vulgata.
+Community detection, structure inference in higher-order networks (hypergraphs).
 {{% /columns %}}
 
 
-## Tempora nisi nunc
+## Future research
 
-Lorem **markdownum** emicat gestu. Cannis sol pressit ducta. **Est** Idaei,
-tremens ausim se tutaeque, illi ulnis hausit, sed, lumina cutem. Quae avis
-sequens!
+There are plenty areas complex network can be used, transportation network, neural network, pullutant network, and so on. Collaboration is welcomed all the time.
+期待计算神经科学，计算生物学等多领域合作。
 
-    var panel = ram_design;
-    if (backup + system) {
-        file.readPoint = network_native;
-        sidebar_engine_device(cell_tftp_raster,
-                dual_login_paper.adf_vci.application_reader_design(
-                graphicsNvramCdma, lpi_footer_snmp, integer_model));
-    }
-
-## Locis suis novi cum suoque decidit eadem
-
-Idmoniae ripis, at aves, ali missa adest, ut _et autem_, et ab?
+此仓库仍在施工中，如发现错误请随时联系
+Contact me: xuanchen.liu.97@gmail.com
