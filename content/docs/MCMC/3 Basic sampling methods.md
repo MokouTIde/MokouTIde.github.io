@@ -32,7 +32,7 @@ If {{< katex >}}u\leqslant \alpha(\theta^*,\theta^{(t-1)}){{< /katex >}}, set {{
 
 Otherwise, set {{< katex >}}\theta^{(t)}=\theta^{(t-1)}{{< /katex >}}.
 
-$(5)$ Go back to step {{< katex >}}(2){{< .katex >}}.
+$(5)$ Go back to step {{< katex >}}(2){{< /katex >}}.
 
 ## Gibbs sampler
 
