@@ -43,7 +43,7 @@ $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 
 {{< /katex >}}
 
-(b) Compute the acceptance probability ($\alpha_t$):
+(b) Compute the acceptance probability ({{< katex >}}\alpha_t{{< /katex >}}):
 
 {{< katex display=true >}}
 
@@ -144,7 +144,7 @@ $(3)$ Approximate the integral using
 
 {{% hint info %}}
 **NOTE**  
-可将分布翻转，分布的峰看做碗底，HMC就是在一个无摩擦的碗里拨动一个小球，小球的每次停止位置即为一个采样，[可看直观图像](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
+将分布翻转，分布的峰看做碗底，HMC就是在一个无摩擦的碗里拨动一个小球，小球的每次停止位置（受步长影响）即为一个采样，[可看直观图像](http://elevanth.org/blog/2017/11/28/build-a-better-markov-chain/)
 {{% /hint %}}
  
 ## Riemann manifold MALA and HMC
