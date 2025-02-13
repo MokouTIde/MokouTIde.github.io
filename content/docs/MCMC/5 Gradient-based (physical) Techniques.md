@@ -20,7 +20,10 @@ Obtain the solution
 
 here, {{< katex >}}D=\frac{k_BT}{\lambda}{{< /katex >}}, which means the square of the distance between the average motion position of Brownian motion particles and the origin (initial point) is proportional to time.
 
-NOTE：式子的解表示粒子能跑到的范围
+{{% hint info %}}
+**NOTE**  
+式子的解表示粒子能跑到的范围
+{{% /hint %}}
 
 **Simulated annealing (SA)** is a probabilistic technique for approximating the global optimum of a given function. Specifically, it is a metaheuristic to approximate global optimization in a large search space for an optimization problem. 
 
@@ -82,7 +85,6 @@ H(\theta,\rho)=-log\pi(\theta)+\frac{1}{2}\rho^T\rho
 p(\theta,\rho)=\frac{1}{Z}exp(-H(\theta,\rho))=\bar{\pi}(\theta)N(\rho|0,I)
 
 {{< /katex >}}
-
  
 The Hamiltonian equations for the dynamics of the particles in fictitious time $\tau$ are now given by
 
@@ -100,7 +102,10 @@ The Hamiltonian equations for the dynamics of the particles in fictitious time $
 
 The HMC algorithm constructs the proposal distribution by simulating trajectories from the Hamiltonian equations.
 
-NOTE：采用辛积分器计算结果，例如蛙跳法
+{{% hint info %}}
+**NOTE**  
+采用辛积分器计算结果，例如蛙跳法
+{{% /hint %}}
  
 $(1)$ Choose an initial state $\theta^{(0)}$, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the number of integration steps {{< katex >}}L{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
