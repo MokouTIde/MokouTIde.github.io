@@ -29,6 +29,8 @@ here, {{< katex >}}D=\frac{k_BT}{\lambda}{{< /katex >}}, which means the square 
 
 The state of some physical systems, and the function {{< katex >}}E(s) {{< /katex >}} to be minimized, is analogous to the internal energy of the system in that state. The goal is to bring the system, from an arbitrary initial state to a state with the minimum possible energy.
 
+**Algorithm MALA**
+
 $(1)$ Choose an initial state {{< katex >}}\theta^{(0)} {{< /katex >}}, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
 $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
@@ -105,6 +107,8 @@ The HMC algorithm constructs the proposal distribution by simulating trajectorie
 **NOTE**  
 采用辛积分器计算结果，例如蛙跳法
 {{% /hint %}}
+
+**Algorithm HMC**
  
 $(1)$ Choose an initial state {{< katex >}}\theta^{(0)}{{< /katex >}}, the discretization step {{< katex >}}\Delta\tau{{< /katex >}}, the number of integration steps {{< katex >}}L{{< /katex >}}, the total number of iterations {{< katex >}} (T) {{< /katex >}}, and the burn-in period {{< katex >}} (T_b) {{< /katex >}}.
 
