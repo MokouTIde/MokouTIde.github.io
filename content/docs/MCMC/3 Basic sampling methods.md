@@ -1,4 +1,4 @@
-## Metroplis Algorithm
+## 3.1 Metroplis Algorithm
 
 $(1)$ Draw {{< katex >}}\theta{{< /katex >}} from {{< katex >}}q(\theta){{< /katex >}} and denote the draw by {{< katex >}}\theta^*{{< /katex >}}.
 
@@ -14,7 +14,7 @@ To decide whether to accept or not, draw one observation, {{< katex >}}u{{< /kat
 NOTE：Metropolis算法最早用于求粒子系统的内能，因此{{< katex >}}(2){{< /katex >}}中出现了{{< katex >}}exp(-\Delta E/kT){{< /katex >}}项
 
 
-## Metroplis-Hasitings Algorithm
+## 3.2 Metroplis-Hasitings Algorithm
 
 $(1)$ Initiate the algorithm with a value {{< katex >}}\theta^{(0)}{{< /katex >}} from the parameter space of {{< katex >}}\theta{{< /katex >}}.
 
@@ -34,7 +34,7 @@ Otherwise, set {{< katex >}}\theta^{(t)}=\theta^{(t-1)}{{< /katex >}}.
 
 $(5)$ Go back to step {{< katex >}}(2){{< /katex >}}.
 
-## Gibbs sampler
+## 3.3 Gibbs sampler
 
 $(1)$ Initialize the chain by selecting the starting values for all components, {{< katex >}}\theta_i^{(0)},i=1,2,\cdots,q{{< /katex >}}.
 
