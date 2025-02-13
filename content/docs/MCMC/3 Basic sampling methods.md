@@ -13,7 +13,7 @@ To decide whether to accept or not, draw one observation, {{< katex >}}u{{< /kat
 
 {{% hint info %}}
 **NOTE**  
-Metropolis算法最早用于求粒子系统的内能，因此出现了{{< katex >}}exp(-\Delta E/kT){{< /katex >}}项。
+Metropolis算法最早用于求粒子系统的内能，因此出现了 {{< katex >}}exp(-\Delta E/kT){{< /katex >}}项。
 {{% /hint %}}
 
 ## 3.2 Metroplis-Hasitings Algorithm
