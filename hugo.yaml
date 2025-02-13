@@ -8,11 +8,18 @@ theme: hugo-book
 disablePathToLower: true
 enableGitInfo: true
 
+
+
+
 # Needed for mermaid/katex shortcodes
+
+
+
 markup:
   goldmark:
     renderer:
       unsafe: true
+
   tableOfContents:
     startLevel: 1
 
@@ -46,6 +53,10 @@ menu:
 #      weight: 20
 
 params:
+
+  katex: true
+#  math: true
+
   # (Optional, default light) Sets color theme: light, dark or auto.
   # Theme 'auto' switches between dark and light modes based on browser/os preferences
   BookTheme: "light"
