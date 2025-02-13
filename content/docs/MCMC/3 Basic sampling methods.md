@@ -1,4 +1,4 @@
-**Metroplis Algorithm**
+**Metroplis Algorithm
 
 $(1)$ Draw $\theta$ from $q(\theta)$ and denote the draw by $\theta^*$.
 
@@ -14,7 +14,7 @@ To decide whether to accept or not, draw one observation, $u$, from the uniform 
 NOTE：Metropolis算法最早用于求粒子系统的内能，因此{{< katex >}}(2){{< /katex >}}中出现了{{< katex >}}exp(-\Delta E/kT){{< /katex >}}项
 
 
-**Metroplis-Hasitings Algorithm**
+**Metroplis-Hasitings Algorithm
 
 $(1)$ Initiate the algorithm with a value $\theta^{(0)}$ from the parameter space of $\theta$.
 
@@ -34,7 +34,7 @@ Otherwise, set {{< katex >}}\theta^{(t)}=\theta^{(t-1)}{{< /katex >}}.
 
 $(5)$ Go back to step $(2)$.
 
-**Gibbs sampler**
+**Gibbs sampler
 
 $(1)$ Initialize the chain by selecting the starting values for all components, $\theta_i^{(0)},i=1,2,\cdots,q$.
 
