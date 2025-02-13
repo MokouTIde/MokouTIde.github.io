@@ -12,7 +12,7 @@
 
 \alpha=\frac{p(\theta^*|y)}{Kq(\theta^*)}\quad (1\quad or\quad exp(-\Delta E/kT)).
 
-{{< katex display=true >}}
+{{< katex >}}
 
  
 
@@ -48,7 +48,7 @@ NOTE：Metropolis算法最早用于求粒子系统的内能，因此{{< katex >}
 
 \alpha(\theta^*,\theta^{(t-1)})=min\left\{1,\frac{p(\theta^*)/q(\theta^*|\theta^{(t-1)})}{p(\theta^{(t-1)})/q(\theta^{(t-1)}|\theta^*)}\right\}
 
-{{< katex display=true >}}
+{{< katex >}}
 
 where we suppress notationally the dependence on the data, {{< katex >}}y{{< katex >}}, for simplicity.
 
