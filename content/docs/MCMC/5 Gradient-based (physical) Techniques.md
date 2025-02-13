@@ -230,7 +230,7 @@ h_i(\theta)=-\frac{1}{2}tr\left\{G^{-1}(\theta)\frac{\partial G(\theta)}{\partia
  
 ## "no-U-turn sampler" (NUTS).
 
-In practice, it is important to note that discretizing the Hamiltonian dynamics introduces two free parameters, the step size {{< katex >}}\epsilon{{< /katex >}} and the trajectory length $T\epsilon$, both to be calibrated. As an empirically successful and popular variant of HMC, the "no-U-turn sampler" (NUTS) of Hoffman and Gelman (2014) adapts the value of {{< katex >}}\epsilon{{< /katex >}} based on primal-dual averaging.[^1]
+In practice, it is important to note that discretizing the Hamiltonian dynamics introduces two free parameters, the step size {{< katex >}}\epsilon{{< /katex >}} and the trajectory length $T\epsilon$, both to be calibrated. As an empirically successful and popular variant of HMC, the "no-U-turn sampler" (NUTS) of Hoffman and Gelman (2014) adapts the value of {{< katex >}}\epsilon{{< /katex >}} based on primal-dual averaging. <sup id="a1">[[1]](#f1)</sup
 
 It also eliminates the need to choose the trajectory length {{< katex >}}T{{< /katex >}} via a recursive algorithm that builds a set of candidate proposals for a number of forward and backward leapfrog steps and stops automatically when the simulated path steps back.
 
@@ -238,4 +238,4 @@ It also eliminates the need to choose the trajectory length {{< katex >}}T{{< /k
 
 Notice how the path grows in both directions. This is the algorithm figuring out when the path turns around. When the path starts to turn around, NUTS stops the simulation and takes a sample. Then it flicks the particle in another random direction and starts another simulation.
 
-[^1] [Hoffman, Matthew D., and Andrew Gelman. "The No-U-Turn sampler: adaptively setting path lengths in Hamiltonian Monte Carlo." J. Mach. Learn. Res. 15.1 (2014): 1593-1623.](https://www.jmlr.org/papers/volume15/hoffman14a/hoffman14a.pdf)
+<span id="f1">1.[^](#a1)</span> [Hoffman, Matthew D., and Andrew Gelman. "The No-U-Turn sampler: adaptively setting path lengths in Hamiltonian Monte Carlo." J. Mach. Learn. Res. 15.1 (2014): 1593-1623.](https://www.jmlr.org/papers/volume15/hoffman14a/hoffman14a.pdf)
