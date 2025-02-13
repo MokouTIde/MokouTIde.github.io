@@ -6,7 +6,7 @@ $(1)$ Initialization: Choose an initial covariance {{< katex >}}\Sigma_0{{< /kat
 
 $(2)$ FOR {{< katex >}}t=1,\cdots,T{{< /katex >}}:
 
-(a) Set $C_t=\lambda_{t-1}\Sigma_{t-1}{{< /katex >}}. Draw {{< katex >}}\theta'\sim N(\theta^{(t-1)},C_t) {{< /katex >}} and {{< katex >}}u\sim U([0,1)) {{< /katex >}}.
+(a) Set {{< katex >}}C_t=\lambda_{t-1}\Sigma_{t-1}{{< /katex >}}. Draw {{< katex >}}\theta'\sim N(\theta^{(t-1)},C_t) {{< /katex >}} and {{< katex >}}u\sim U([0,1)) {{< /katex >}}.
 
 (b) Compute the acceptance probability:
 
