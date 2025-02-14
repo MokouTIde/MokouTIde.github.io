@@ -25,9 +25,9 @@ Complex networks have a wide range of applications, including transportation net
 
 {{% hint warning %}}
 **Warning**  
-此仓库为个人研究过程中的笔记，目前仍在施工中，如发现错误请随时联系。
-
 This book is for personal research notes and is still under construction. Please feel free to contact us if you find any errors.
+
+此仓库为个人研究过程中的笔记，目前仍在施工中，如发现错误请随时联系。
 {{% /hint %}}
 
 
