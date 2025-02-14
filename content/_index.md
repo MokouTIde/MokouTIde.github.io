@@ -23,6 +23,12 @@ Complex networks have a wide range of applications, including transportation net
 
 期待计算神经科学，计算生物学等多领域合作。
 
-此仓库仍在施工中，如发现错误请随时联系
+{{% hint warning %}}
+**Warning**  
+此仓库为个人研究过程中的笔记，目前仍在施工中，如发现错误请随时联系。
 
-Contact me: xuanchen.liu.97@gmail.com
+This book is for personal research notes and is still under construction. Please feel free to contact us if you find any errors.
+{{% /hint %}}
+
+
+**Contact me**: xuanchen.liu.97@gmail.com
