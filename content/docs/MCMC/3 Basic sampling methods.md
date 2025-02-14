@@ -1,5 +1,5 @@
 ## 3.1 Metroplis Algorithm
-```
+
 $(1)$ Draw {{< katex >}}\theta{{< /katex >}} from {{< katex >}}q(\theta){{< /katex >}} and denote the draw by {{< katex >}}\theta^*{{< /katex >}}.
 
 $(2)$ Compute the ratio 
@@ -8,7 +8,6 @@ $(2)$ Compute the ratio
 {{< /katex >}}
 
 $(3)$ With probability {{< katex >}}\alpha{{< /katex >}}, accept the draw {{< katex >}}\theta^*{{< /katex >}} as a draw from the posterior,{{< katex >}}p(\theta^*|y){{< /katex >}}. If {{< katex >}}\theta^*{{< /katex >}} is rejected, go back to step {{< katex >}}(1){{< /katex >}}.
-```
 
 To decide whether to accept or not, draw one observation, {{< katex >}}u{{< /katex >}}, from the uniform distribution on {{< katex >}}U(0,1){{< /katex >}}. If {{< katex >}}u\leqslant \alpha{{< /katex >}}, accept {{< katex >}}\theta^*{{< /katex >}}; If {{< katex >}}u\geqslant a{{< /katex >}}, reject {{< katex >}}\theta^*`{{< /katex >}}.
 
