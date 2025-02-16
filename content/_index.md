@@ -1,9 +1,4 @@
 ---
-bookCollapseSection: true
-bookHidden: true
----
-
----
 title: Introduction
 type: docs
 ---
