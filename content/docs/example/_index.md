@@ -1,4 +1,9 @@
 ---
+bookCollapseSection: true
+bookHidden: true
+---
+
+---
 weight: 100
 bookFlatSection: true
 title: "Example Site"
