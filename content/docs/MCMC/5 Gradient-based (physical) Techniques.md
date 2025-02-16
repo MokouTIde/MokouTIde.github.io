@@ -61,8 +61,6 @@ $(3)$  Approximate the integral
 
 {{< /katex >}}
 
-{{% hint info %}}
-**NOTE**  
 原始的退火方程为
 
 {{< katex display=true >}}
@@ -72,7 +70,6 @@ d\theta(\tau)=\frac{1-2d}{2}\pi_u^{1-2d}(\theta(\tau))\nabla log\pi_u \theta(\ta
 {{< /katex >}}
 
 其中{{< katex >}}d{{< /katex >}}的取值范围是{{< katex >}}[0,\frac{1}{2}]{{< /katex >}}，表示温度的高低，在最终稳态时温度取最低也就是{{< katex >}}d=0{{< /katex >}}；{{< katex >}}\pi_u{{< /katex >}}表示扩散方程，因此算法可简化为如上形式。
-{{% /hint %}}
 
 ## Hamiltonian Monte Carlo Algorithm (HMC).
 
