@@ -193,3 +193,90 @@ A simple, but ultimately naive way of moving forward is to sample {{< katex >}}x
    P(m|r,b)=\frac{1}{n_r-1}
  {{< /katex >}}
  
+and then sample the m nodes uniformly at random, with a probability
+ {{< katex display=true >}}
+   P(x|r,b,m)=\frac{\delta_{m,\sum_{i}^{}x_i}}{\binom{n_r}{m}}
+ {{< /katex >}}
+
+Sample the {{< katex >}}m{{< /katex >}} nodes uniformly at random, with a probability
+ {{< katex display=true >}}
+   P(x|r,b,m)=\frac{\delta_{m,\sum_{i}^{}x_i}}{\binom{n_r}{m}}
+ {{< /katex >}}
+ 
+yielding thus
+ {{< katex display=true >}}
+   P(x|r,b)=\sum_{m=1}^{n_r-1}P(x|r,b,m)P(m|r,b)
+ {{< /katex >}}
+ 
+Although this approach is easy to implement, it does not work in practice, because such fully random split proposals are almost never accepted, since the number of good splits, even when they exist, is exponentially outnumbered by bad ones.
+
+Furthermore, the above puts a low probability for every possible split, which means that it will also cause good merges to be rejected, as they cannot be easily reversed under this scheme.
+
+### Auxiliary variables and split staging
+Recall the detailed balance condition that needs to be fulfilled for the Markov chain to converge to the target distribution
+ {{< katex display=true >}}
+   \pi(b)T(b'|b)=\pi(b')T(b|b')
+ {{< /katex >}}
+ 
+where {{< katex >}}T(b'|b){{< /katex >}} is the transition probability, after the rejection step has been considered.
+
+Now, let us consider an augmented version of the posterior distribution obtained by sampling an arbitrary auxiliary variable {{< katex >}}α{{< /katex >}} with probability {{< katex >}}P(\alpha,b){{< /katex >}}. If we use MCMC to sample from the joint distribution {{< katex >}}P(\alpha,b)=P(\alpha|b)\pi(b){{< /katex >}}, then we can marginalize it to obtain the original distribution {{< katex >}}\pi(b)=\sum_{\alpha}^{}P(\alpha,b){{< /katex >}}, therefore sampling from this augmented space subsumes sampling from the original one.
+
+The usefulness of introducing this auxiliary variable comes from the fact that we can use it to condition our move proposals, as we will see. The detailed balance condition in this case reads
+ {{< katex display=true >}}
+   P(\alpha|b)\pi(b)T(\alpha',b'|\alpha,b)=P(\alpha'|b')\pi(b')T(\alpha,b|\alpha',b')
+ {{< /katex >}}
+ 
+We can choose the joint transition by first making a transition {{< katex >}}b\rightarrow b'{{< /katex >}} and then sampling the auxiliary variable from its conditional distribution, i.e.,
+ {{< katex display=true >}}
+   T(\alpha',b'|\alpha,b)=P(\alpha'|b')T(b'|\alpha,b)
+ {{< /katex >}}
+ 
+Then the above detailed balance condition boils down to
+ {{< katex display=true >}}
+   \pi(b)T(b'|b,\alpha)=\pi(b')T(b|b',\alpha')
+ {{< /katex >}}
+ 
+which, importantly, is independent of the probability {{< katex >}}P(\alpha|b){{< /katex >}}.
+
+We can incorporate this into the Metropolis-Hastings framework by conditioning our proposals {{< katex >}}P(b'|b,\alpha){{< /katex >}}, and accepting them with probability
+ {{< katex display=true >}}
+   min[1,\frac{\pi(b')P(b|b',\alpha')}{\pi(b)P(b'|b,\alpha)}]
+ {{< /katex >}}
+which will enforce the condition above.
+
+The key advantage here is that we do not need to know how to compute the probability {{< katex >}}P(\alpha|b){{< /katex >}}; we need only to be able to sample from this distribution.
+
+This gives us freedom to implement more elaborate schemes, and leads us to the notion of split staging, where as an auxiliary variable we use a tentative split {{< katex >}}\hat{x}{{< /katex >}}, which is again a binary vector with elements {{< katex >}}\hat{x}_i\in\left\{0,1\right\}{{< /katex >}}, defined for the nodes that belong to the group being split, which is sampled from some arbitrary distribution (which we will discuss shortly), and we perform the final split via a single Gibbs sweep from that initial state, whose probability can be easily computed as
+
+ {{< katex display=true >}}
+   P(x|r,b,\hat{x})=\prod_{i\in V_r}^{}P(x_i|r,b,x_1,\cdots,x_{i-1},\hat{x}_{i+1},\cdots,\hat{x}_N)
+ {{< /katex >}}
+ 
+where {{< katex >}}r{{< /katex >}} is the group being split, {{< katex >}}V_r{{< /katex >}} is the set of nodes that belong to it.
+
+Hence
+ {{< katex display=true >}}
+   P(x_i|r,b,x_1,\cdots,x_{i-1},\hat{x}_{i+1},\cdots,\hat{x}_N)=\frac{\pi[b'(x_1,\cdots,x_{i-1},x_i,\hat{x}_{i+1},\cdots,\hat{x}_N)]}
+   {\sum_{x=1}^{1}\pi[b'(x_1,\cdots,x_{i-1},x_i,\hat{x}_{i+1},\cdots,\hat{x}_N)]}
+ {{< /katex >}}
+ 
+is the probability of moving node {{< katex >}}i{{< /katex >}} to either {{< katex >}}x_i=0{{< /katex >}} or {{< katex >}}1{{< /katex >}} in sequence, with the shortcut notation {{< katex >}}b'(x)=[b_1'(x_1),\cdots,b_N'(x_N)]{{< /katex >}} is given by
+ {{< katex display=true >}}
+   b_i'(x_i)=\left\{
+    \begin{array}{lll}
+      s &  & \text{if {{< katex >}}x_i=1{{< /katex >}} and {{< katex >}}b_i=r{{< /katex >}}} \\
+      b_i &  & \text{otherwise}
+    \end{array}
+    \right.
+ {{< /katex >}}
+ 
+This yields a total split proposal probability
+
+ {{< katex display=true >}}
+   P(b'|b,\hat{x})=\sum_{r}^{}P(r)\sum_{x}^{}P(x|r,b,\hat{x})\prod_{i}^{}\delta_{b_i',b_i'(x_i)}
+ {{< /katex >}}
+ 
+which is conditioned on the stage split {{< katex >}}\hat{x}{{< /katex >}}, sampled from an arbitrary distribution.
+
+As was shown before, starting from a random division, and then moving one node at a time, usually yields very bad performance, as this scheme needs a long time to find the optimal division. This happens even if the optimal division is very clear, with a very high posterior probability, since the initial random division effectively hides it from view, and the MCMC sampling essentially does a random walk in the configuration space, before it can find the best split.
