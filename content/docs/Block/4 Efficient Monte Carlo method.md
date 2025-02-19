@@ -86,56 +86,72 @@ Normalized mutual information (NMI) between the planted and the inferred partiti
 
 {Bayesian community detection}
 The inference approach to community detection involves first the stipulation of a generative model for the network structure given a network partition {{< katex >}}b=\left\{b_1,\cdots,b_N\right\}{{< /katex >}}, where {{< katex >}}b_i\in[1,B]{{< /katex >}} is the membership of node {{< katex >}}i{{< /katex >}} in one of {{< katex >}}B{{< /katex >}} groups. For example, when using the degree-corrected stochastic block model (DC-SBM)\footfullcite{A. Decelle, F. Krzakala, C. Moore, and L. Zdeborová, Asymptotic analysis of the stochastic block model for modular networks and its algorithmic applications, Phys. Rev. E 84, 066106 (2011).}, it is assumed that a network with adjacency matrix {{< katex >}}A{{< /katex >}} is generated with probability
+
  {{< katex display=true >}}
    P(A|\lambda,\theta,b)=\prod_{i<j}^{}\frac{(\lambda_{b_i b_j}\theta_i\theta_j)^{A_{ij}}e^{-\lambda_{b_i b_j}\theta_i\theta_j}}{A_{ij}!}\times
    \prod_{i}^{}\frac{(\lambda_{b_i b_j}\theta_i^2/2)^{A_{ij}/2}e^{-\lambda_{b_i b_j}\theta_i^2/2}}{(A_{ij}/2)!}
  {{< /katex >}}
+ 
 with the additional parameters {{< katex >}}\lambda{{< /katex >}} and {{< katex >}}\theta{{< /katex >}} specifying the affinity between groups and expected node degrees, respectively.
 
 The inference procedure consists in sampling from the posterior distribution
+
  {{< katex display=true >}}
    P(b|A)=\frac{P(A|b)P(b)}{P(A)}
  {{< /katex >}}
+ 
 where {{< katex >}}P(b){{< /katex >}} is a prior probability of node partitions, and
+
  {{< katex display=true >}}
    P(A|b)=\int_{}^{}P(A|\lambda,\theta,b)P(\theta|b)P(\lambda|b)d\theta d\lambda
  {{< /katex >}}
+ 
 is the marginal likelihood integrated over the remaining model parameters, weighted according to their own prior probabilities.
 
-
 If we make a noninformative choice for them,
+
  {{< katex display=true >}}
    P(\theta|b)=\prod_{i}^{}(n_r-1)!\delta(\sum_{i}^{}\theta_i\delta_{b_i,r}-1)
  {{< /katex >}}
+ 
  {{< katex display=true >}}
    P(\lambda|b,\bar{\lambda})=\prod_{r<s}^{}e^{-\lambda_{rs}/\bar{\lambda}}/\bar{\lambda}\prod_{r}^{}e^{-\lambda_{rs}/2\bar{\lambda}}/2\bar{\lambda}
  {{< /katex >}}
+ 
 then we can compute the integral exactly as
+
  {{< katex display=true >}}
    P(A|b)=\frac{\bar{\lambda}^E}{(\bar{\lambda}+1)^{E+B(B+1)/2}}\times\frac{\prod_{r<s}^{}e_{rs}!\prod_{r}^{}e_{rr}!}{\prod_{i<j}^{}A_{ij}!\prod_{i}^{}A_{ii}!}
    \prod_{r}^{}\frac{(n_r-1)!}{(e_r+n_r-1)!}\prod_{i}^{}k_i!
  {{< /katex >}}
+ 
 where {{< katex >}}e_{rs}=\sum_{ij}^{}A_{ij}\delta_{b_i,r}\delta_{b_j,s}{{< /katex >}}, {{< katex >}}e_r=\sum_{s}^{}e_{rs}{{< /katex >}}, and {{< katex >}}n_r=\sum_{i}^{}\delta_{b_i,r}{{< /katex >}}.
 
-
 The last remaining quantity,
+
  {{< katex display=true >}}
    P(A)=\sum_{b}^{}P(A|b)P(b)
  {{< /katex >}}
+ 
 is called the evidence and serves as a normalization constant for the posterior distribution.
 
 The simplest kind of move proposal that can be done is the one that involves the change of a single node {{< katex >}}i{{< /katex >}} from its current group {{< katex >}}b_i=r{{< /katex >}} to another group {{< katex >}}s{{< /katex >}}, according to a local move proposal {{< katex >}}P(s|i,b){{< /katex >}}, leading to
+
  {{< katex display=true >}}
    P(b'|b)=\sum_{i}^{}P(i)\prod_{j}^{}[P(b'_j|j,b)]^{\delta_{ij}}[\delta_{b_i',b_i}]^{1-\delta_{ij}}
  {{< /katex >}}
-with {{< katex >}}P(i){{< /katex >}} being the probability of choosing node {{< katex >}}i{{< /katex >}} to perform such a move.\\
+ 
+with {{< katex >}}P(i){{< /katex >}} being the probability of choosing node {{< katex >}}i{{< /katex >}} to perform such a move.
+
 Note that we do not need to compute this whole expression when calculating the MH acceptance criterion, as the forward and reverse proposal must involve the same node, which also means that the probability {{< katex >}}P(i){{< /katex >}} will cancel out, and hence we are allowed to choose nodes with arbitrary frequencies, as long as they are nonzero to guarantee ergodicity.
 
 We choose to move to existing groups with a probability given by
  {{< katex display=true >}}
    P_e(s|i,b)=\sum_{t}^{}w_{it}\frac{e_{ts}+\epsilon}{e_t+\epsilon B(b)}
  {{< /katex >}}
-where {{< katex >}}w_{it}=\sum_{j}^{}A_{ij}\delta_{b_j,t}/k_i{{< /katex >}} is the fraction of neighbors of node {{< katex >}}i{{< /katex >}} that belong to group {{< katex >}}t{{< /katex >}}. The constant {{< katex >}}\epsilon{{< /katex >}} must be nonzero to guarantee ergodicity (a reasonable choice is simply {{< katex >}}\epsilon=1{{< /katex >}}).\\
+ 
+where {{< katex >}}w_{it}=\sum_{j}^{}A_{ij}\delta_{b_j,t}/k_i{{< /katex >}} is the fraction of neighbors of node {{< katex >}}i{{< /katex >}} that belong to group {{< katex >}}t{{< /katex >}}. The constant {{< katex >}}\epsilon{{< /katex >}} must be nonzero to guarantee ergodicity (a reasonable choice is simply {{< katex >}}\epsilon=1{{< /katex >}}).
+
 Moreover, we consider the situation of the occupation of a new group. Hence we incorporate this kind of move by augmenting our proposals as
  {{< katex display=true >}}
    P(s|i,b)=\left\{
@@ -145,29 +161,39 @@ Moreover, we consider the situation of the occupation of a new group. Hence we i
     \end{array}
     \right.
  {{< /katex >}}
+ 
 where {{< katex >}}d{{< /katex >}} is the probability with which the population of a new group is attempted.
 
 To overcome the limitations of single-node moves, we may introduce moves where entire groups are merged together. We implement this by selecting an existing group {{< katex >}}r{{< /katex >}} with a uniform probability {{< katex >}}P(r)=1/B(b){{< /katex >}}  and moving all its nodes to a different group {{< katex >}}s{{< /katex >}} with probability {{< katex >}}P(s|r,b){{< /katex >}}, yielding a transition proposal
+
  {{< katex display=true >}}
    P(b'|b)=\sum_{rs}^{}P(r)P(s|r,b)[\prod_{i}^{}(\delta_{b_i',s})^{\delta_{b_i,r}}(\delta_{b_i',bi})^{1-\delta_{b_i,r}}]
  {{< /katex >}}
+ 
 Following the same line as before, we choose a smarter merge proposal rather than choose the proposal uniformly as random is
+
  {{< katex display=true >}}
    P(s|r,b)=\frac{1-\delta_{rs}}{n_r}\sum_{i}^{}\delta_{b_i,r}\frac{P_e(s|i,b)}{1-P_e(r|i,b)}
  {{< /katex >}}
+ 
 where {{< katex >}}P_e(s|i,b)=\sum_{t}^{}w_{it}\frac{e_{ts}+\epsilon}{e_t+\epsilon B(b)}{{< /katex >}}
 
-Such merge proposals are straightforward to implement, but in order for this to incorporated into the MH scheme we need to be able to propose “split” moves that go in the reverse direction, i.e., we need to be able to select a subset of the nodes in group {{< katex >}}r{{< /katex >}} and move them to a new group {{< katex >}}s{{< /katex >}}.\\
+Such merge proposals are straightforward to implement, but in order for this to incorporated into the MH scheme we need to be able to propose “split” moves that go in the reverse direction, i.e., we need to be able to select a subset of the nodes in group {{< katex >}}r{{< /katex >}} and move them to a new group {{< katex >}}s{{< /katex >}}.
+
 We denote this subset via a binary vector {{< katex >}}x=\left\{0,1\right\}^N{{< /katex >}}, where {{< katex >}}x_i=1{{< /katex >}} if node {{< katex >}}i{{< /katex >}} is selected to move from group {{< katex >}}r{{< /katex >}} to {{< katex >}}s{{< /katex >}}; otherwise {{< katex >}}x_i=0{{< /katex >}}. This leads us to a move proposal that can be written as
+
  {{< katex display=true >}}
    P(b'|b)=\sum_{r}^{}P(r)\sum_{x}^{}P(x|r,b)[\prod_{i}^{}(\delta_{b_i',s(b)})^{\delta_{x_i,1}}(\delta_{b_i',b_i})^{\delta_{x_i,0}}]
  {{< /katex >}}
+ 
 where {{< katex >}}s(b){{< /katex >}} denotes the new group not currently occupied in partition {{< katex >}}b{{< /katex >}} (we do not differentiate between unoccupied groups).
 
 A simple, but ultimately naive way of moving forward is to sample {{< katex >}}x{{< /katex >}} in two stages: at first we select the number {{< katex >}}m{{< /katex >}} of nodes to be moved uniformly at random in the interval {{< katex >}}[1,n_r-1]{{< /katex >}} with probability
+
  {{< katex display=true >}}
    P(m|r,b)=\frac{1}{n_r-1}
  {{< /katex >}}
+ 
 and then sample the m nodes uniformly at random, with a probability
  {{< katex display=true >}}
    P(x|r,b,m)=\frac{\delta_{m,\sum_{i}^{}x_i}}{\binom{n_r}{m}}
@@ -177,41 +203,49 @@ Sample the {{< katex >}}m{{< /katex >}} nodes uniformly at random, with a probab
  {{< katex display=true >}}
    P(x|r,b,m)=\frac{\delta_{m,\sum_{i}^{}x_i}}{\binom{n_r}{m}}
  {{< /katex >}}
+ 
 yielding thus
  {{< katex display=true >}}
    P(x|r,b)=\sum_{m=1}^{n_r-1}P(x|r,b,m)P(m|r,b)
  {{< /katex >}}
-Although this approach is easy to implement, it does not work in practice, because such fully random split proposals are almost never accepted, since the number of good splits, even when they exist, is exponentially outnumbered by bad ones.\\
-Furthermore, the above puts a low probability for every possible split, which means that it will also cause good merges to be rejected, as they cannot be easily reversed under this scheme.
+ 
+Although this approach is easy to implement, it does not work in practice, because such fully random split proposals are almost never accepted, since the number of good splits, even when they exist, is exponentially outnumbered by bad ones.
 
+Furthermore, the above puts a low probability for every possible split, which means that it will also cause good merges to be rejected, as they cannot be easily reversed under this scheme.
 
 ### Auxiliary variables and split staging
 Recall the detailed balance condition that needs to be fulfilled for the Markov chain to converge to the target distribution
  {{< katex display=true >}}
    \pi(b)T(b'|b)=\pi(b')T(b|b')
  {{< /katex >}}
-where {{< katex >}}T(b'|b){{< /katex >}} is the transition probability, after the rejection step has been considered.\\
+ 
+where {{< katex >}}T(b'|b){{< /katex >}} is the transition probability, after the rejection step has been considered.
+
 Now, let us consider an augmented version of the posterior distribution obtained by sampling an arbitrary auxiliary variable {{< katex >}}α{{< /katex >}} with probability {{< katex >}}P(\alpha,b){{< /katex >}}. If we use MCMC to sample from the joint distribution {{< katex >}}P(\alpha,b)=P(\alpha|b)\pi(b){{< /katex >}}, then we can marginalize it to obtain the original distribution {{< katex >}}\pi(b)=\sum_{\alpha}^{}P(\alpha,b){{< /katex >}}, therefore sampling from this augmented space subsumes sampling from the original one.
 
 The usefulness of introducing this auxiliary variable comes from the fact that we can use it to condition our move proposals, as we will see. The detailed balance condition in this case reads
  {{< katex display=true >}}
    P(\alpha|b)\pi(b)T(\alpha',b'|\alpha,b)=P(\alpha'|b')\pi(b')T(\alpha,b|\alpha',b')
  {{< /katex >}}
+ 
 We can choose the joint transition by first making a transition {{< katex >}}b\rightarrow b'{{< /katex >}} and then sampling the auxiliary variable from its conditional distribution, i.e.,
  {{< katex display=true >}}
    T(\alpha',b'|\alpha,b)=P(\alpha'|b')T(b'|\alpha,b)
  {{< /katex >}}
+ 
 Then the above detailed balance condition boils down to
  {{< katex display=true >}}
    \pi(b)T(b'|b,\alpha)=\pi(b')T(b|b',\alpha')
  {{< /katex >}}
+ 
 which, importantly, is independent of the probability {{< katex >}}P(\alpha|b){{< /katex >}}.
 
 We can incorporate this into the Metropolis-Hastings framework by conditioning our proposals {{< katex >}}P(b'|b,\alpha){{< /katex >}}, and accepting them with probability
  {{< katex display=true >}}
    min[1,\frac{\pi(b')P(b|b',\alpha')}{\pi(b)P(b'|b,\alpha)}]
  {{< /katex >}}
-which will enforce the condition above.\\
+which will enforce the condition above.
+
 The key advantage here is that we do not need to know how to compute the probability {{< katex >}}P(\alpha|b){{< /katex >}}; we need only to be able to sample from this distribution.
 
 This gives us freedom to implement more elaborate schemes, and leads us to the notion of split staging, where as an auxiliary variable we use a tentative split {{< katex >}}\hat{x}{{< /katex >}}, which is again a binary vector with elements {{< katex >}}\hat{x}_i\in\left\{0,1\right\}{{< /katex >}}, defined for the nodes that belong to the group being split, which is sampled from some arbitrary distribution (which we will discuss shortly), and we perform the final split via a single Gibbs sweep from that initial state, whose probability can be easily computed as
