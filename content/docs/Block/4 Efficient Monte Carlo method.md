@@ -335,3 +335,66 @@ and the final move is accepted with probability
  {{< /katex >}}
 This kind of move is able to redistribute the nodes between two groups, without going through states with a smaller or lower number of groups, which we found to improve mixing in circumstances where the number of groups tends not to vary significantly in the posterior distribution.
 
+## Complexity
+Even though the split and merge moves are strictly sufficient to guarantee ergodicity and detailed balance, the mixing time of the Markov chain is improved if we combine all types of moves considered above.\\
+We do so by introducing the relative move propensities {{< katex >}}\omega_{\text{single}}{{< /katex >}}, {{< katex >}}\omega_{\text{merge}}{{< /katex >}}, {{< katex >}}\omega_{\text{split}}{{< /katex >}} and {{< katex >}}\omega_{\text{merge-split}}{{< /katex >}}, such that, e.g., the probability of a single-node move is given by
+ {{< katex display=true >}}
+   \frac{\omega_{\text{single}}}{\omega_{\text{single}}+\omega_{\text{merge}}+\omega_{\text{split}}+\omega_{\text{merge-split}}}
+ {{< /katex >}}
+and likewise for the other kinds of moves.
+
+We note that for merge and splits we need to incorporate these move probabilities into the rejection criterion, e.g., for merge proposals we have
+ {{< katex display=true >}}
+   min[1,\frac{\pi(b')P(b|b',\hat{x})\omega_{\text{split}}}{\pi(b)P(b'|b)\omega_{\text{merge}}}]
+ {{< /katex >}}
+and likewise for splits.\\
+In our experiments, we found it more efficient to propose single nodes more often, and we have chosen {{< katex >}}\omega_{\text{single}}=N{{< /katex >}} and {{< katex >}}\omega_{\text{merge}}=\omega_{\text{split}}=\omega_{\text{merge-split}}=1{{< /katex >}} for our analysis.
+
+
+### A rapidly mixing situation
+The key set {{< katex >}}S_\alpha{{< /katex >}} is defined by\footfullcite{Bumeng Zhuo, Gao Chao, Mixing Time of Metropolis-Hastings for Bayesian Community Detection. Journal of Machine Learning Research 22 (2021) 1-89}
+ {{< katex display=true >}}
+   S_\alpha=\left\{Z\in [n]^K:\sum_{i=1}^{n}\mathbb{I}\left\{Z_i=k\right\}\in [\frac{n}{\alpha K},\frac{\alpha n}{K}],\text{ for all }k\in[K] \right\}
+ {{< /katex >}}
+where the hyperparameter {{< katex >}}\alpha{{< /katex >}} controls the size of the feasible set {{< katex >}}S_\alpha{{< /katex >}}, which rules out those models whose group sizes differ too much.\\
+If some conditions can be hold (A,B,C or A,D). Then, the "{{< katex >}}\epsilon{{< /katex >}}-mixing" time of the MH algorithm is upper bounded by
+ {{< katex display=true >}}
+   \tau(Z_0)\leq 4Kn^2\text{max}\left\{\gamma_0,n^{-\tau}\right\}\cdot(\xi \log\pi(Z_0|A)^{-1}+\log(\epsilon^{-1}))
+ {{< /katex >}}
+with probability at least {{< katex >}}1-C_1 n^{-C_2}-\eta{{< /katex >}} for some constants {{< katex >}}C_1,C_2{{< /katex >}}.
+
+## Complexity and characteristics
+
+{{< katex display=true >}}
+  \begin{tabular}{c|c|c}
+  \hline
+    Algorithm  &  Complexity  &  Condition     \\
+  \hline
+    single(agglo)  &  {{< katex >}}O(N\ln^2N){{< /katex >}}  &  Empty    \\
+    single(agglo)  &  {{< katex >}}O(N){{< /katex >}}  &  Sparse    \\
+    single  &  {{< katex >}}O[N^{-C}]{{< /katex >}}  &  Initial State     \\
+    merge  &  {{< katex >}}O[M(n_r+n_s+e_r+e_s)]{{< /katex >}}  &  Empty     \\
+    split  &  {{< katex >}}O[M(n_r+e_r)]{{< /katex >}}  &  Empty     \\
+    merge-split  &  {{< katex >}}O[M(N+E)]{{< /katex >}}  &  Empty     \\
+  \hline
+  \end{tabular}
+{{< /katex >}}
+
+where {{< katex >}}M{{< /katex >}} is the number of Gibbs sweeps used in the split staging.
+
+Strength of single-node algorithm
+Complexity can be reduced by some initial condition
+Easy to understand, since it follows the original MC algorithm
+
+Weakness of single-node algorithm
+Would trapped in metastable
+Lack of efficiency
+
+Strength of merge-split algorithm
+Performs better than single-node algorithm
+Can be used without limitation
+
+Weakness of single-node algorithm
+Takes longer time
+Although it raised efficiency moves, these moves happens rarely
+
