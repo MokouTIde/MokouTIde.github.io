@@ -280,3 +280,58 @@ This yields a total split proposal probability
 which is conditioned on the stage split {{< katex >}}\hat{x}{{< /katex >}}, sampled from an arbitrary distribution.
 
 As was shown before, starting from a random division, and then moving one node at a time, usually yields very bad performance, as this scheme needs a long time to find the optimal division. This happens even if the optimal division is very clear, with a very high posterior probability, since the initial random division effectively hides it from view, and the MCMC sampling essentially does a random walk in the configuration space, before it can find the best split.
+
+As an alternative approach\footfullcite{T. P. Peixoto, Efficient Monte Carlo and greedy heuristic for the inference of stochastic block models, Phys. Rev. E 89, 012804 (2014).} that agglomerative schemes work significantly better, where one first puts each node in their own group, then proceeds by merging groups together, until the desired number of groups is reached.
+
+What typically happens in this scheme is that the intermediary partitions reached amount to subdivisions of the final partition, thus overcoming the entropic barriers seen by the random initial division scheme, and thus achieving the good split in a shorter time.
+
+However, we need also to consider a rather unintuitive property of the dual role of our split proposal, which functions also as a mechanism to reverse merge proposals.
+
+After experimentation, we determined that the following scheme, which combines a variety of strategies, works well in a majority of cases. We begin by sampling a prestaging split {{< katex >}}\hat{x}^0{{< /katex >}} uniformly at random from one of the following three algorithms:
+
+{{< katex >}}(1){{< /katex >}} Random split:
+
+(a) We sample the split size {{< katex >}}m{{< /katex >}} uniformly at random from the interval {{< katex >}}[1, n_r-1]{{< /katex >}}.
+
+(b) We choose {{< katex >}}\hat{x}^0{{< /katex >}} uniformly at random from all splits of size {{< katex >}}\sum_{i}^{}\hat{x}_i^0=m{{< /katex >}}.
+
+{{< katex >}}(2){{< /katex >}} Sequential spreading:
+
+(a) We move all nodes in group {{< katex >}}r{{< /katex >}} to an empty group {{< katex >}}t{{< /katex >}}.
+
+(b) In random order, we chose the nodes sequentially and move them either to group {{< katex >}}r{{< /katex >}} or group {{< katex >}}s{{< /katex >}}, with probability proportional to {{< katex >}}\pi(\hat{b}_1,\cdots,\hat{b}_i,\cdots,\hat{b}_N){{< /katex >}} for a node {{< katex >}}i{{< /katex >}}, with {{< katex >}}\hat{b}{{< /katex >}} being the current working partition, except for the first two moves, which are to groups {{< katex >}}r{{< /katex >}} and {{< katex >}}s{{< /katex >}}, to prevent leaving either group empty. In the end, to a node with {{< katex >}}\hat{b}_i=r{{< /katex >}} we set {{< katex >}}\hat{x}_i^0=0{{< /katex >}}, and if {{< katex >}}\hat{b}_i=s{{< /katex >}}, we set {{< katex >}}\hat{x}_i^0=1{{< /katex >}}.
+
+{{< katex >}}(3){{< /katex >}} Sequential coalescence:
+
+(a) We move each node {{< katex >}}i{{< /katex >}} in group {{< katex >}}r{{< /katex >}} to its own previously empty group {{< katex >}}t_i{{< /katex >}}, which in the end all have a single node each.
+
+(b) We proceed like {{< katex >}}2{{< /katex >}}(b) above.
+
+From the prestage {{< katex >}}\hat{x}^0{{< /katex >}}, we obtain {{< katex >}}\hat{x}^0{{< /katex >}} by performing {{< katex >}}M{{< /katex >}} sequential Gibbs sweeps for every node in group {{< katex >}}r{{< /katex >}} and {{< katex >}}s{{< /katex >}}, where they are allowed to move only between these two groups, forbidding moves that would leave either group empty.\\
+With the stage split in place, the final proposal is obtained by performing one more Gibbs sweep as described previously, and it is then accepted with probability
+ {{< katex display=true >}}
+   min[1,\frac{\pi(b')P(b|b')}{\pi(b)P(b'|b,\hat{x})}]
+ {{< /katex >}}
+where the reverse transition {{< katex >}}P(b|b'){{< /katex >}} corresponds to a merge proposal.
+
+Likewise a merge can be accepted with probability
+ {{< katex display=true >}}
+   min[1,\frac{\pi(b')P(b|b',\hat{x})}{\pi(b)P(b'|b)}]
+ {{< /katex >}}
+which means we always need to generate a staging split {{< katex >}}\hat{x}{{< /katex >}} for each merge candidate, using the algorithm above, to compute the reverse proposal probability.
+
+As the number {{< katex >}}M{{< /katex >}} of Gibbs sweeps made during the staging step increases, the more likely it becomes that the split will be proposed with a probability proportional to the target distribution {{< katex >}}\pi(b){{< /katex >}}, which would be optimal. In practice, however, we do not want to choose this value too large, as it is not worth to spend too much time in a single Monte Carlo step. Although the optimal value is likely to vary for each network, we found that a value around {{< katex >}}M=10{{< /katex >}} offers a good trade-off between speed and proposal quality in most experiments we made.
+
+### Joint merge-split moves
+We also consider an additional kind of move that keeps the number of groups constant, and is composed of a merge of group {{< katex >}}r{{< /katex >}} into {{< katex >}}s{{< /katex >}}, which is then split again by moving some nodes from {{< katex >}}s{{< /katex >}} to back to {{< katex >}}r{{< /katex >}}. This amounts to a proposal probability
+
+ {{< katex display=true >}}
+   P(b'|b,\hat{x})=\sum_{rs}^{}P(r)P(s|r,b)\sum_{\hat{b}}^{}[\prod_{i}^{}(\delta_{\hat{b}_i,s})^{\delta_{b_i,r}}(\delta_{\hat{b}_i,b_i})^{1-\delta_{b_i,r}}]\times \sum_{x}^{}P(x|s,\hat{b},\hat{x})\prod_{i}^{}\delta_{\hat{b}'_i(x_i),b'_i}
+ {{< /katex >}}
+and the final move is accepted with probability
+
+ {{< katex display=true >}}
+   min[1,\frac{\pi(b')P(b|b',\hat{x}')}{\pi(b)P(b'|b,\hat{x})}]
+ {{< /katex >}}
+This kind of move is able to redistribute the nodes between two groups, without going through states with a smaller or lower number of groups, which we found to improve mixing in circumstances where the number of groups tends not to vary significantly in the posterior distribution.
+
