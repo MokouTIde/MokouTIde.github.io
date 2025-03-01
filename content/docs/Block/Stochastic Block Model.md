@@ -10,16 +10,7 @@ weight: 1
 
 We begin with an unweighted and undirected network which contains {{< katex >}}N{{< /katex >}} nodes and {{< katex >}}q{{< /katex >}} communities. For any node {{< katex >}}i{{< /katex >}}, we assign a label {{< katex >}}b_i{{< /katex >}} to it, {{< katex >}}b_i\in \left\{1,2,\cdots,q\right\}{{< /katex >}} indicating the community that node {{< katex >}}i{{< /katex >}} belongs to, then {{< /katex >}}\Gamma=\left\{b_1, b_2,\cdots,b_N\right\}{{< /katex >}} represents the label assignment of the network. The connectivity probability {{< katex >}}\theta_{ij}{{< /katex >}} between nodes {{< katex >}}i{{< /katex >}} and {{< katex >}}j{{< /katex >}} depends on whether they are in any of the same communities, given by
 
-{{< katex display=true >}}
-\begin{split}
-\theta_{ij}= \left \{
-\begin{array}{ll}
-p_{\text{in}}, & b_i = b_j, \\
-p_{\text{out}}, & b_i\neq b_j,
-\end{array}
-\right.
-\end{split}
-{{< /katex >}}_
+
 
 where {{< katex >}}p_{\text{in}}{{< /katex >}} and {{< katex >}}p_{\text{out}}{{< /katex >}} represent the connectivity probability of nodes inside the same community and between different communities, respectively.
 
