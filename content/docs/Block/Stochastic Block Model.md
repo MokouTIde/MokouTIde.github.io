@@ -31,5 +31,7 @@ P(\Gamma|A) = \prod_{i\lt j}\theta_{ij}^{A_{ij}}(1-\theta_{ij})^{1-A_{ij}},
 
 where {{< katex >}}A_{ij}{{< /katex >}} is an element of the adjacency matrix {{< katex >}}A{{< /katex >}}, if {{< katex >}}i{{< /katex >}} and {{< katex >}}j{{< /katex >}} are connected, {{< katex >}}A_{ij}=1{{< /katex >}}, otherwise, {{< katex >}}A_{ij}=0{{< /katex >}}. Inferring the parameters {{< katex >}}\Gamma {{< /katex >}}is equivalent to maximizing the posterior distribution {{< katex >}}P{{< /katex >}}.
 
+Another common expression is using {{< katex >}}p{{< /katex >}} represents {{< katex >}}p_{\text{in}}{{< /katex >}} and {{< katex >}}q{{< /katex >}} represents {{< katex >}}p_{\text{out}}{{< /katex >}}.
+
 
 ## Community Detection
